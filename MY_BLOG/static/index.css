@@ -1,0 +1,16 @@
+#signup_corners{
+    height: 400px;
+    width: 300px;
+    position: absolute;
+    top: 80px;
+    left: 1000px;
+    background-color: blueviolet;
+}
+#login_corners{
+    height: 400px;
+    width: 300px;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    background-color: blueviolet;
+}
