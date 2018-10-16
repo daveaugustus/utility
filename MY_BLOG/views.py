@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
+
+"""The signup() functon checks whether the method is post or not if yes it checks for the value is signup if yes it calls
+the register function or it calls the login function"""
 def signup(request):
     if request.method == 'POST':
         if request.POST.get('signup-click') == 'signup_to':
@@ -22,7 +25,7 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'index.html', {'form': form})
 
-
+"""Declaration of login function which is called in signup function if the value of submit button is not 'signup_to then'"""
 def _login(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -37,12 +40,14 @@ def _login(request):
         
     
 
-
+"""welcome_home function does nothing but displays data to the home and works as an UI for the users"""
 def welcome_home(request):
     context = {}
     context['user']= request.user
     return render(request, 'home.html', context)
 
+
+"""Visit_again() function just logs out from the system and redirects to the index page where an  user ca login again"""
 def visit_again(request):
     if request.method is 'POST':
         logout(request)
