@@ -8,7 +8,7 @@ GENDER_DEF = (
 )
 
 class Profile(models.Model):
-    username    = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
+    user_id     = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
     profession  = models.CharField(max_length = 50)
     gender      = models.CharField(max_length = 10, choices = GENDER_DEF, default = 'Select')
     profile_img = models.ImageField(default = 'default.png', upload_to = 'profile_pics', blank = True, null = True)
@@ -21,10 +21,10 @@ class Profile(models.Model):
         return '{}'.format(self.username)
 
 class Post(models.Model):
-    author          = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    author_id       = models.ForeignKey(Profile, on_delete = models.CASCADE)
     title           = models.CharField(max_length = 50)
     about           = models.CharField(max_length = 100)
-    article         = models.TextField()
+    article         = models.TextField(null = True, blank = True)
     publish_date    = models.DateTimeField(null = True)
     modified_date   = models.DateTimeField(null = True)
     article_img     = models.ImageField(default = 'default.gpg', upload_to = 'article_pics', blank = True, null = True)
@@ -33,7 +33,7 @@ class Post(models.Model):
         return '{}'.format(self.title)
 
 class Comment(models.Model):
-    reader   = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    user_id  = models.ForeignKey(User, on_delete = models.CASCADE)
     article  = models.ManyToManyField(Post)
     comment  = models.TextField()
     liked    = models.BooleanField(default=False)
