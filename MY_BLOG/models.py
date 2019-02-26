@@ -8,7 +8,7 @@ GENDER_DEF = (
 )
 
 class Profile(models.Model):
-    user_id     = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
+    user        = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
     profession  = models.CharField(max_length = 50)
     gender      = models.CharField(max_length = 10, choices = GENDER_DEF, default = 'Select')
     profile_img = models.ImageField(default = 'default.png', upload_to = 'profile_pics', blank = True, null = True)
@@ -18,23 +18,28 @@ class Profile(models.Model):
 
     def __str__(self):
         # return self.username
-        return '{}'.format(self.username)
+        return '{}'.format(self.user)
 
 class Post(models.Model):
-    author_id       = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    author          = models.ForeignKey(Profile, on_delete = models.CASCADE)
     title           = models.CharField(max_length = 50)
     about           = models.CharField(max_length = 100)
     article         = models.TextField(null = True, blank = True)
     publish_date    = models.DateTimeField(null = True)
     modified_date   = models.DateTimeField(null = True)
     article_img     = models.ImageField(default = 'default.gpg', upload_to = 'article_pics', blank = True, null = True)
+    thumbs_up       = models.IntegerField(null = True)
+    thumbs_down     = models.IntegerField(null = True)
 
     def __str__(self):
         return '{}'.format(self.title)
 
 class Comment(models.Model):
-    user_id  = models.ForeignKey(User, on_delete = models.CASCADE)
+    user     = models.ForeignKey(User, on_delete = models.CASCADE)
     article  = models.ManyToManyField(Post)
     comment  = models.TextField()
     liked    = models.BooleanField(default=False)
     disliked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.comment
