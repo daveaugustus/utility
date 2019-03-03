@@ -1,7 +1,7 @@
 from django.urls import path
-from . views import IndexTemplateView
+from . views import BlogHomeListView
 
 urlpatterns = [
-    path('',  IndexTemplateView.as_view(), name='index_page_view'),
+    path('',  BlogHomeListView.as_view(), name='index_page_view'),
 
 ]

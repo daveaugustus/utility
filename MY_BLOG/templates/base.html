@@ -59,12 +59,13 @@
 			</div>
 		</form>
 		<ul class="nav navbar-nav navbar-right ml-auto">
+			{% if not user.is_authenticated %}
 			<li class="nav-item">
 				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
 				<ul class="dropdown-menu form-wrapper">
 					<li>
 						<form method="POST">
-              {% csrf_token %}
+							{% csrf_token %}
 							<p class="hint-text">Sign in with your social media account</p>
 							<div class="form-group social-btn clearfix">
 								<a href="#" class="btn btn-primary pull-left"><i class="fa fa-facebook"></i> Facebook</a>
@@ -126,6 +127,26 @@
 					</li>
 				</ul>
 			</li>
+			{% else %}
+				<li class="nav-item">
+				<!-- <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a> -->
+					<img src='{{ user.profile.profile_img.url }}' width="45px" height="45px">
+					</li>
+					<li class="nav-item dropdown">
+						<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">{{user}}<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="dropdown-item">Post a blog</a></li>
+							<li><a href="#" class="dropdown-item">View Profile</a></li>
+							<li><a href="#" class="dropdown-item">Settings</a></li>
+							<form class="" action="/logout/" method="POST">
+								{% csrf_token %}
+								<button type="submit" class="btn btn-primary btn-block" name="logout-button" value="Logout">Logout</button>
+								<!-- <input type="submit" name="" value="Logout" class="btn btn-primary btn-block"> -->
+								<!-- <li><a href="#" class="dropdown-item">Logout</a></li> -->
+							</form>
+						</ul>
+					</li>
+			{% endif %}
 		</ul>
 	</div>
 </nav>
