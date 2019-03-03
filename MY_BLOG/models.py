@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 GENDER_DEF = (
         ('male','MALE'),
         ('female', 'FEMALE'),
-        ('other', 'Other')
+        ('other', 'OTHER')
 )
 
 class Profile(models.Model):
@@ -29,7 +29,7 @@ class Post(models.Model):
     author_id       = models.ForeignKey(Profile, on_delete = models.CASCADE)
     title           = models.CharField(max_length = 50, verbose_name='Post Title',)
     about           = models.CharField(max_length = 100)
-    article         = models.TextField(null = True, blank = True, unique = True)
+    article         = models.TextField()
     publish_date    = models.DateTimeField(null = True)
     modified_date   = models.DateTimeField(null = True)
     article_img     = models.ImageField(default = 'default.gpg', upload_to = 'article_pics', blank = True, null = True)

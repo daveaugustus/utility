@@ -1,9 +1,7 @@
 from django.urls import path
-from . import views
+from . views import IndexTemplateView
 
 urlpatterns = [
-    path('', views.signup, name='name_signup'),
+    path('',  IndexTemplateView.as_view(), name='index_page_view'),
 
-    path('home/', views.welcome_home, name='welcome_home'),
-    path('logout/', views.visit_again, name='visit_again')
 ]
