@@ -13,13 +13,17 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
-class BlogPost:
+class BlogPost(forms.Form):
+    title = forms.CharField()
+    # post = forms.TextField()
+
+
+class ProfileUpdate(forms.Form):
     pass
 
 
-class ProfileUpdate:
+class CommentBox(forms.Form):
     pass
 
-
-class CommentBox:
-    pass
+class SearchForm(forms.Form):
+    search_text = forms.CharField()
