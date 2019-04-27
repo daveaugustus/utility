@@ -79,8 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blogpost_v2',
         'USER': 'root',
-        'PASSWORD': 'Megamind',
-        'HOST': 'localhost',
+        'PASSWORD': 'code',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
